@@ -1,0 +1,13 @@
+com\leocaliban\atividade\biblioteca\beans\AbstractBean.class
+com\leocaliban\atividade\biblioteca\dao\ItemBibliotecaDAO.class
+com\leocaliban\atividade\biblioteca\beans\NovoItemBean.class
+com\leocaliban\atividade\biblioteca\beans\DeletaItemBean.class
+com\leocaliban\atividade\biblioteca\domain\ItemBiblioteca.class
+com\leocaliban\atividade\biblioteca\filters\ItemBibliotecaFilter.class
+com\leocaliban\atividade\biblioteca\beans\PesquisaItemBean.class
+com\leocaliban\atividade\biblioteca\service\exceptions\ServiceBibliotecaException.class
+com\leocaliban\atividade\biblioteca\service\ItemBibliotecaService.class
+com\leocaliban\atividade\biblioteca\dao\exceptions\PersistenciaBibliotecaException.class
+com\leocaliban\atividade\biblioteca\BibliotecaException.class
+com\leocaliban\atividade\biblioteca\converter\ItemBibliotecaConverter.class
+com\leocaliban\atividade\biblioteca\domain\enums\Tipo.class

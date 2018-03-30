@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Lista de Itens</title>
+</h:head>
+
+<h:body style="background-color:#FFFAF0;">
+
+	<h:messages />
+
+	<h:link outcome="novo-item.xhtml" value="Cadastrar Novo Item" />
+	
+	<h:form id="formFiltro" style="width: 377px; margin: 0 auto;">
+		
+		<h:panelGrid columns="2" border="1" cellpadding = "10" cellspacing = "0" bgcolor="#E6E6FA">	
+			<f:facet name="header">
+				<h:outputText value="Pesquisar Itens"/>
+			</f:facet>
+
+			<h:outputLabel value="Título" for="titulo" />
+			<h:inputText id="titulo" value="#{pesquisaItemBean.filter.titulo}" label="Título" />
+
+			<h:outputLabel value="Editora" for="editora" />
+			<h:inputText id="editora" value="#{pesquisaItemBean.filter.editora}" label="Editora" />
+			
+			<h:outputLabel value="ISBN" for="isbn" />
+			<h:inputText id="isbn" value="#{pesquisaItemBean.filter.iSBN}" label="ISBN" />
+			
+			<h:panelGroup>
+				<h:outputLabel value="Minímo de páginas" for="minPaginas" />
+				<h:inputText id="minPaginas" value="#{pesquisaItemBean.filter.minimoPaginas}" label="Minímo de Páginas" />
+		    </h:panelGroup>
+		    
+		    <h:panelGroup>
+				<h:outputLabel value="Máximo de páginas" for="maxPaginas" />
+				<h:inputText id="maxPaginas" value="#{pesquisaItemBean.filter.maximoPaginas}" label="Máximo de Páginas" />
+            </h:panelGroup>
+            
+            <h:panelGroup>
+				<h:outputLabel value="Data mínima publicação" for="dataPublicacaoMin" />
+				<h:inputText id="dataPublicacaoMin" value="#{pesquisaItemBean.filter.dataPublicacaoMin}" label="Data mínima da publicação">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:inputText>
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<h:outputLabel value="Data máxima publicação" for="dataPublicacaoMax" />
+	            <h:inputText id="dataPublicacaoMax" value="#{pesquisaItemBean.filter.dataPublicacaoMax}" label="Data máxima da publicação">
+	                <f:convertDateTime pattern="dd/MM/yyyy" />
+	            </h:inputText>
+			</h:panelGroup>
+			
+			
+			<h:outputLabel value="Tipo de item" for="tipo" />
+			<h:selectOneMenu id="tipo" value="#{pesquisaItemBean.filter.tipo}" label="Tipo de item">
+				<f:selectItem  itemLabel="Selecione" itemValue="#{null}" />
+				<f:selectItems value="#{pesquisaItemBean.getTipos()}" var="varTipo" itemLabel="#{varTipo.nome}" itemValue="#{varTipo}" />
+			</h:selectOneMenu>
+	
+	        <f:facet name="footer">
+                <h:commandButton id="btn-pesquisar" value="Pesquisar" action="#{pesquisaItemBean.filtrar()}" />
+                <h:commandButton id="btn-limpar-botao" value="Limpar" action="#{pesquisaItemBean.limpar()}" style="margin-left:230px;" />
+           </f:facet>
+			
+		</h:panelGrid>
+	</h:form>
+	
+	<h:panelGrid rendered="#{pesquisaItemBean.semRegistro}" style="width: 500px; margin: 0 auto;" >
+       <h1 align="center">Sem itens cadastrados no sistema. Cadastre um ;)</h1>
+    </h:panelGrid>
+    
+    <h:panelGrid rendered="#{pesquisaItemBean.vazio}" style="width: 500px; margin: 0 auto;" >
+       <h1 align="center">Não conseguimos encontrar itens com estes critérios.</h1>
+    </h:panelGrid>
+
+	<h:dataTable id="tabelaItens" border="1" var="varItens" value="#{pesquisaItemBean.itens}" cellpadding="1"
+	    style="margin: 0 auto; margin-top:8px;" rendered="#{!pesquisaItemBean.listaItensVazia}" bgcolor="#E6E6FA" cellspacing = "0" >
+	
+		<h:column>
+            <f:facet name="header">ISBN</f:facet>
+            <h:outputText value="#{varItens.iSBN}" />
+        </h:column>
+       
+		<h:column>
+			<f:facet name="header">Título</f:facet>
+			<h:outputText value="#{varItens.titulo}" />
+		</h:column>
+		
+		<h:column>
+            <f:facet name="header" >Tipo</f:facet>
+            <h:outputText value="#{varItens.tipo.nome}" />
+        </h:column>
+		
+		<h:column>
+			<f:facet name="header">Editora</f:facet>
+			<h:outputText value="#{varItens.editora}" />
+		</h:column>
+		
+		<h:column>
+            <f:facet name="header">Assunto</f:facet>
+            <h:outputText value="#{varItens.assunto}" />
+        </h:column>
+		
+		<h:column>
+			<f:facet name="header">Nº páginas</f:facet>
+			<h:outputText value="#{varItens.quantidadePaginas}" />
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Data de publicação</f:facet>
+			<h:outputText value="#{varItens.dataPublicacao}">
+				<f:convertDateTime pattern="dd/MM/yyyy" />
+			</h:outputText>
+		</h:column>
+
+		<h:column>
+			
+			<f:facet name="header">Operações</f:facet>
+			<h:link outcome="novo-item.xhtml" value="Editar">
+				<f:param name="item" value="#{varItens.id}" />
+			</h:link>
+			<h:outputText value=" "/>
+			
+			<h:link outcome="deletar-item.xhtml" value="Excluir">
+                <f:param name="item" value="#{varItens.id}" />
+            </h:link>
+			
+		</h:column>
+	</h:dataTable>
+</h:body>
+</html>

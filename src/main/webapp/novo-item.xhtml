@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+<f:metadata>
+    <f:viewParam name="item" value="#{novoItemBean.itemBiblioteca}" />
+    <f:viewAction action="#{novoItemBean.init()}"/>
+</f:metadata>
+
+<h:head>
+	<title>Criar item</title>
+</h:head>
+
+<h:body style="background-color:#FFFAF0;">
+	<h:messages />
+	   <h1 align="center">#{novoItemBean.edicao ? 'Editar item de biblioteca' : 'Criar novo item de biblioteca'}</h1>
+    
+	<h:form id="form-novo" style="width: 300px; margin: 0 auto;" >
+	   <h:panelGrid columns="2" border="1" cellpadding = "10" cellspacing = "1" bgcolor="#E6E6FA" >
+	       <f:facet name="header">Item</f:facet>
+	       
+	       <h:outputLabel value="Id" rendered="#{novoItemBean.edicao}" />
+           <h:outputLabel value="#{novoItemBean.itemBiblioteca.id}"
+                rendered="#{novoItemBean.edicao}" />
+	       
+	       <h:outputLabel value="ISBN" for="isbn"/>
+           <h:inputText id="isbn" value="#{novoItemBean.itemBiblioteca.iSBN}" required="true" label="ISBN" />
+	       
+	       <h:outputLabel value="Título" for="titulo"/>
+	       <h:inputText id="titulo" value="#{novoItemBean.itemBiblioteca.titulo}" required="true" label="Título" />
+	       	       
+	       <h:outputLabel value="Editora" for="editora"/>
+           <h:inputText id="editora" value="#{novoItemBean.itemBiblioteca.editora}" required="true" label="Editora" />
+           
+           
+           <h:outputLabel value="Tipo" for="tipo"/>
+           <h:selectOneMenu id="tipo" value="#{novoItemBean.itemBiblioteca.tipo}" required="true" hideNoSelectionOption="true"
+                label="Tipo" style="width: 170px">
+                <f:selectItem  itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
+                <f:selectItems value="#{novoItemBean.getTipos()}" var="vItem" itemLabel="#{vItem.nome}" 
+                    itemValue="#{vItem}" />
+           
+           </h:selectOneMenu>
+           
+           <h:outputLabel value="Data de publicação" for="data-publicacao"/>
+           <h:inputText id="data-publicacao" value="#{novoItemBean.itemBiblioteca.dataPublicacao}" 
+                required="true" label="Data de publicação">
+                <f:convertDateTime pattern="dd/MM/yyyy" />
+           </h:inputText>
+           
+           <h:outputLabel value="Nº páginas" for="numeroPaginas" />
+           <h:inputText id="numeroPaginas" value="#{novoItemBean.itemBiblioteca.quantidadePaginas}" required="true" label="Nº páginas" />
+           
+           <h:outputLabel value="Assunto" for="assunto"/>
+           <h:inputText id="assunto" value="#{novoItemBean.itemBiblioteca.assunto}" label="Assunto" />
+           
+           <h:outputLabel value="Tags" for="tags"/>
+           <h:inputText id="tags" value="#{novoItemBean.itemBiblioteca.tags}" label="Tags" />
+           
+           <h:outputLabel value="Descrição" for="descricao"/>
+           <h:inputTextarea id="descricao" value="#{novoItemBean.itemBiblioteca.descricao}" required="true" label="Descrição"
+                cols="21" rows="4" />
+           
+           <f:facet name="footer">
+                <h:commandButton action="#{novoItemBean.salvar}" value="Salvar"  />
+                <h:button outcome="index.xhtml" value="Cancelar" style="margin-left:150px;"/>
+           </f:facet>
+	   </h:panelGrid>
+   	      
+	</h:form>
+</h:body>
+</html>
