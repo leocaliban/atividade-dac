@@ -14,6 +14,7 @@
 
 <h:body style="background-color:#FFFAF0;">
 	<h:messages />
+	
 	   <h1 align="center">#{novoItemBean.edicao ? 'Editar item de biblioteca' : 'Criar novo item de biblioteca'}</h1>
     
 	<h:form id="form-novo" style="width: 300px; margin: 0 auto;" >
@@ -25,7 +26,12 @@
                 rendered="#{novoItemBean.edicao}" />
 	       
 	       <h:outputLabel value="ISBN" for="isbn"/>
-           <h:inputText id="isbn" value="#{novoItemBean.itemBiblioteca.iSBN}" required="true" label="ISBN" />
+	       <h:panelGroup>
+	           <h:inputText id="isbn" value="#{novoItemBean.itemBiblioteca.iSBN}" required="true" label="ISBN">
+	                <f:validator validatorId="isbnValidator"/>
+	           </h:inputText>
+	           <h:message for="isbn" />
+           </h:panelGroup>
 	       
 	       <h:outputLabel value="Título" for="titulo"/>
 	       <h:inputText id="titulo" value="#{novoItemBean.itemBiblioteca.titulo}" required="true" label="Título" />
