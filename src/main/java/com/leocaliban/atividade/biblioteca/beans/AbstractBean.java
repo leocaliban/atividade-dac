@@ -31,7 +31,7 @@ public abstract class AbstractBean implements Serializable {
 			FacesContext.getCurrentInstance().validationFailed();
 		}
 
-		FacesMessage msg = new FacesMessage(severity, tipo + " " + detalhe, null);
+		FacesMessage msg = new FacesMessage(severity, tipo, detalhe);
 
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.setKeepMessages(true);
