@@ -26,6 +26,32 @@
             <artifactId>commons-validator</artifactId>
             <version>1.6</version>
         </dependency>
+        
+        <!-- Primefaces -->
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.2</version>
+        </dependency>
+        
+        <!-- Primefaces Themes -->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
+        </dependency>
+        
 	</dependencies>
+    
+    <repositories>
+    
+        <!-- Repositório primefaces -->
+        <repository>
+            <id>prime-repo</id>
+            <name>Prime Repo</name>
+            <url>http://repository.primefaces.org</url>
+        </repository>
+        
+    </repositories>
 
 </project>
