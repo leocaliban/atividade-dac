@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+        <ui:insert name="title">
+            Página principal
+         </ui:insert>
+     </title>
+     <h:outputScript name="locale-primefaces.js" library="js" />
+</h:head>
+
+<h:body style="background-color:#FFFAF0;">
+    <header id="header">
+        <ui:insert name="header">
+            <p:link outcome="novo-item.xhtml" value="Cadastrar Novo Item" rendered="#{renderLinkNovoItem}"/>
+            <p:link outcome="itens-descricao.xhtml" value="Selecionar Itens" style="float:right;" rendered="#{renderLinkSelecionarItem}"/>
+            <p:link outcome="index.xhtml" value="Voltar" rendered="#{renderLinkVoltar}" />
+            <p:separator style="border:1px solid #cccccc;"/>
+        </ui:insert>
+    </header>
+
+	<div id="content">
+		<ui:insert name="content" />
+	</div>
+
+	<footer style="text-align:center;">
+		<p:separator style="border:1px solid #cccccc;"/>
+			<h:outputLabel value="Atividade DAC - Tema: ExciteBike - By Leocaliban." />
+	</footer>
+</h:body>
+</html>

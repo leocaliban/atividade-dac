@@ -1,89 +1,85 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-	
-<f:metadata>
-    <f:viewParam name="item" value="#{novoItemBean.itemBiblioteca}" />
-    <f:viewAction action="#{novoItemBean.init()}"/>
-</f:metadata>
-
-<h:head>
-	<title>Criar item</title>
-</h:head>
-
-<h:body style="background-color:#FFFAF0;">
-    <h:outputScript name="locale-primefaces.js" library="js" />
-    <p:link outcome="index.xhtml" value="Voltar" />
-	<p:messages id="messagesErrors" showDetail="true" closable="true" severity="error">
-        <p:autoUpdate />
-    </p:messages>
+<ui:composition template="/WEB-INF/templates/layout-padrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
-    <p:growl id="idMessages" showDetail="true" severity="info">
-        <p:autoUpdate />
-    </p:growl>
-	
-	<h:form id="form-novo" style="width: 400px; margin: 0 auto;" >
-	   <p:panelGrid columns="2" >
-	       <f:facet name="header">#{novoItemBean.edicao ? 'Editar item de biblioteca' : 'Criar novo item de biblioteca'}</f:facet>
-	       
-	       <p:outputLabel value="Id" rendered="#{novoItemBean.edicao}" />
-           <p:outputLabel value="#{novoItemBean.itemBiblioteca.id}"
-                rendered="#{novoItemBean.edicao}" />
-	       
-	       <p:outputLabel value="ISBN" for="isbn"/>
-	       <p:outputPanel>
-	           <p:inputText id="isbn" value="#{novoItemBean.itemBiblioteca.iSBN}" required="true" label="ISBN">
-	                <f:validator validatorId="isbnValidator"/>
-	           </p:inputText>
-	           <p:message for="isbn" />
-           </p:outputPanel>
-	       
-	       <p:outputLabel value="Título" for="titulo"/>
-	       <p:inputText id="titulo" value="#{novoItemBean.itemBiblioteca.titulo}" required="true" label="Título" />
-	       	       
-	       <p:outputLabel value="Editora" for="editora"/>
-           <p:inputText id="editora" value="#{novoItemBean.itemBiblioteca.editora}" required="true" label="Editora" />
-           
-           
-           <p:outputLabel value="Tipo" for="tipo"/>
-           <p:selectOneMenu id="tipo" value="#{novoItemBean.itemBiblioteca.tipo}" required="true" label="Tipo">
-                <f:selectItem  itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
-                <f:selectItems value="#{novoItemBean.getTipos()}" var="vItem" itemLabel="#{vItem.nome}" 
-                    itemValue="#{vItem}" />
-           
-           </p:selectOneMenu>
-           
-           <p:outputLabel value="Data de publicação" for="data-publicacao"/>
-           <p:calendar id="data-publicacao" value="#{novoItemBean.itemBiblioteca.dataPublicacao}" required="true" 
-                label="Data de publicação" locale="pt_BR" showButtonPanel="true" navigator="true" pattern="dd/MM/yyyy"
-                yearRange="-30:+10" >
-                <f:convertDateTime pattern="dd/MM/yyyy" />
-           </p:calendar>
-           
-           <p:outputLabel value="Nº páginas" for="numeroPaginas" />
-           <p:inputText id="numeroPaginas" value="#{novoItemBean.itemBiblioteca.quantidadePaginas}" required="true" label="Nº páginas" />
-           
-           <p:outputLabel value="Assunto" for="assunto"/>
-           <p:inputText id="assunto" value="#{novoItemBean.itemBiblioteca.assunto}" label="Assunto" />
-           
-           <p:outputLabel value="Tags" for="tags"/>
-           <p:inputText id="tags" value="#{novoItemBean.itemBiblioteca.tags}" label="Tags" />
-           
-           <p:outputLabel value="Descrição" for="descricao"/>
-           <p:outputPanel>
-	           <p:inputTextarea id="descricao" value="#{novoItemBean.itemBiblioteca.descricao}" required="true" label="Descrição" 
-	                cols="22" rows="4" autoResize="false" maxlength="140" counter="contador" counterTemplate="Restam {0} caracteres" />
-	           <h:outputText id="contador" />
-           </p:outputPanel>
-           
-           <f:facet name="footer">
-                <p:commandButton action="#{novoItemBean.salvar}" value="Salvar" icon="fa fa-save" style="float:left;" />
-                <p:button outcome="index.xhtml" value="Cancelar" icon="fa fa-remove" style="float:right;"/>
-           </f:facet>
-	   </p:panelGrid>
-   	      
-	</h:form>
-</h:body>
-</html>
+	<f:metadata>
+	    <f:viewParam name="item" value="#{novoItemBean.itemBiblioteca}" />
+	    <f:viewAction action="#{novoItemBean.init()}"/>
+	</f:metadata>
+
+	<ui:define name="title">
+        #{novoItemBean.edicao ? 'Editar Item' : 'Criar Item'}
+    </ui:define>
+    
+    <ui:param name="renderLinkVoltar" value="true" />
+    
+    <ui:define name="content">
+
+		<ui:include src="/WEB-INF/templates/componentes/erro-mensagens.xhtml" />
+			
+		<h:form id="form-novo" style="width: 400px; margin: 0 auto;" >
+		   <p:panelGrid columns="2" >
+		       <f:facet name="header">#{novoItemBean.edicao ? 'Editar item de biblioteca' : 'Criar novo item de biblioteca'}</f:facet>
+		       
+		       <p:outputLabel value="Id" rendered="#{novoItemBean.edicao}" />
+	           <p:outputLabel value="#{novoItemBean.itemBiblioteca.id}"
+	                rendered="#{novoItemBean.edicao}" />
+		       
+		       <p:outputLabel value="ISBN" for="isbn"/>
+		       <p:outputPanel>
+		           <p:inputText id="isbn" value="#{novoItemBean.itemBiblioteca.iSBN}" required="true" label="ISBN">
+		                <f:validator validatorId="isbnValidator"/>
+		           </p:inputText>
+		           <p:message for="isbn" />
+	           </p:outputPanel>
+		       
+		       <p:outputLabel value="Título" for="titulo"/>
+		       <p:inputText id="titulo" value="#{novoItemBean.itemBiblioteca.titulo}" required="true" label="Título" />
+		       	       
+		       <p:outputLabel value="Editora" for="editora"/>
+	           <p:inputText id="editora" value="#{novoItemBean.itemBiblioteca.editora}" required="true" label="Editora" />
+	           
+	           
+	           <p:outputLabel value="Tipo" for="tipo"/>
+	           <ui:include src="WEB-INF/templates/componentes/select-tipo.xhtml">
+                    <ui:param name="tipos" value="#{novoItemBean.itemBiblioteca.tipo}" />
+                    <ui:param name="listaTipos" value="#{novoItemBean.getTipos()}" />
+                    <ui:param name="required" value="true" />
+                    <ui:param name="itemLabel" value="#{varTipo.nome}" />
+                </ui:include>
+	           
+	           <p:outputLabel value="Data de publicação" for="data-publicacao"/>
+				<ui:include src="WEB-INF/templates/componentes/calendario.xhtml">
+					<ui:param name="id" value="data-publicacao" />
+					<ui:param name="value" value="#{novoItemBean.itemBiblioteca.dataPublicacao}" />
+					<ui:param name="label" value="Data de publicação" />
+					<ui:param name="required" value="true" />
+				</ui:include>
+	           
+	           <p:outputLabel value="Nº páginas" for="numeroPaginas" />
+	           <p:inputText id="numeroPaginas" value="#{novoItemBean.itemBiblioteca.quantidadePaginas}" required="true" label="Nº páginas" />
+	           
+	           <p:outputLabel value="Assunto" for="assunto"/>
+	           <p:inputText id="assunto" value="#{novoItemBean.itemBiblioteca.assunto}" label="Assunto" />
+	           
+	           <p:outputLabel value="Tags" for="tags"/>
+	           <p:inputText id="tags" value="#{novoItemBean.itemBiblioteca.tags}" label="Tags" />
+	           
+	           <p:outputLabel value="Descrição" for="descricao"/>
+	           <p:outputPanel>
+		           <p:inputTextarea id="descricao" value="#{novoItemBean.itemBiblioteca.descricao}" required="true" label="Descrição" 
+		                cols="22" rows="4" autoResize="false" maxlength="140" counter="contador" counterTemplate="Restam {0} caracteres" />
+		           <h:outputText id="contador" />
+	           </p:outputPanel>
+	           
+	           <f:facet name="footer">
+	                <p:commandButton action="#{novoItemBean.salvar}" value="Salvar" icon="fa fa-save" style="float:left;" />
+	                <p:button outcome="index.xhtml" value="Cancelar" icon="fa fa-remove" style="float:right;"/>
+	           </f:facet>
+		   </p:panelGrid>	   	
+		</h:form>
+    </ui:define>
+</ui:composition>
