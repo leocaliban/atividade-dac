@@ -37,29 +37,29 @@
 			<p:outputLabel value="ISBN" for="isbn" />
 			<p:inputText id="isbn" value="#{pesquisaItemBean.filter.iSBN}" label="ISBN" />
 			
-			<h:panelGroup>
+			<p:outputPanel>
 				<p:outputLabel value="Minímo de páginas" for="minPaginas" />
 				<p:inputText id="minPaginas" value="#{pesquisaItemBean.filter.minimoPaginas}" label="Minímo de Páginas" />
-		    </h:panelGroup>
+		    </p:outputPanel>
 		    
-		    <h:panelGroup>
+		    <p:outputPanel>
 				<p:outputLabel value="Máximo de páginas" for="maxPaginas" />
 				<p:inputText id="maxPaginas" value="#{pesquisaItemBean.filter.maximoPaginas}" label="Máximo de Páginas" />
-            </h:panelGroup>
+            </p:outputPanel>
             
-            <h:panelGroup>
+            <p:outputPanel>
 				<p:outputLabel value="Data mínima publicação" for="dataPublicacaoMin" />
 				<p:inputText id="dataPublicacaoMin" value="#{pesquisaItemBean.filter.dataPublicacaoMin}" label="Data mínima da publicação">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</p:inputText>
-			</h:panelGroup>
+			</p:outputPanel>
 			
-			<h:panelGroup>
+			<p:outputPanel>
 				<p:outputLabel value="Data máxima publicação" for="dataPublicacaoMax" />
 	            <p:inputText id="dataPublicacaoMax" value="#{pesquisaItemBean.filter.dataPublicacaoMax}" label="Data máxima da publicação">
 	                <f:convertDateTime pattern="dd/MM/yyyy" />
 	            </p:inputText>
-			</h:panelGroup>
+			</p:outputPanel>
 			
 			
 			<p:outputLabel value="Tipo de item" for="tipo" />

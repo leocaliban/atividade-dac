@@ -14,66 +14,72 @@
 </h:head>
 
 <h:body style="background-color:#FFFAF0;">
-	<h:messages />
-	
-	   <h1 align="center">#{novoItemBean.edicao ? 'Editar item de biblioteca' : 'Criar novo item de biblioteca'}</h1>
+	<p:messages id="messagesErrors" showDetail="true" closable="true" severity="error">
+        <p:autoUpdate />
+    </p:messages>
     
-	<h:form id="form-novo" style="width: 300px; margin: 0 auto;" >
-	   <h:panelGrid columns="2" border="1" cellpadding = "10" cellspacing = "1" bgcolor="#E6E6FA" >
+    <p:growl id="idMessages" showDetail="true" severity="info">
+        <p:autoUpdate />
+    </p:growl>
+	
+	<h1 align="center">#{novoItemBean.edicao ? 'Editar item de biblioteca' : 'Criar novo item de biblioteca'}</h1>
+    
+	<h:form id="form-novo" style="width: 400px; margin: 0 auto;" >
+	   <p:panelGrid columns="2" >
 	       <f:facet name="header">Item</f:facet>
 	       
-	       <h:outputLabel value="Id" rendered="#{novoItemBean.edicao}" />
-           <h:outputLabel value="#{novoItemBean.itemBiblioteca.id}"
+	       <p:outputLabel value="Id" rendered="#{novoItemBean.edicao}" />
+           <p:outputLabel value="#{novoItemBean.itemBiblioteca.id}"
                 rendered="#{novoItemBean.edicao}" />
 	       
-	       <h:outputLabel value="ISBN" for="isbn"/>
+	       <p:outputLabel value="ISBN" for="isbn"/>
 	       <h:panelGroup>
-	           <h:inputText id="isbn" value="#{novoItemBean.itemBiblioteca.iSBN}" required="true" label="ISBN">
+	           <p:inputText id="isbn" value="#{novoItemBean.itemBiblioteca.iSBN}" required="true" label="ISBN">
 	                <f:validator validatorId="isbnValidator"/>
-	           </h:inputText>
-	           <h:message for="isbn" />
+	           </p:inputText>
+	           <p:message for="isbn" />
            </h:panelGroup>
 	       
-	       <h:outputLabel value="Título" for="titulo"/>
-	       <h:inputText id="titulo" value="#{novoItemBean.itemBiblioteca.titulo}" required="true" label="Título" />
+	       <p:outputLabel value="Título" for="titulo"/>
+	       <p:inputText id="titulo" value="#{novoItemBean.itemBiblioteca.titulo}" required="true" label="Título" />
 	       	       
-	       <h:outputLabel value="Editora" for="editora"/>
-           <h:inputText id="editora" value="#{novoItemBean.itemBiblioteca.editora}" required="true" label="Editora" />
+	       <p:outputLabel value="Editora" for="editora"/>
+           <p:inputText id="editora" value="#{novoItemBean.itemBiblioteca.editora}" required="true" label="Editora" />
            
            
-           <h:outputLabel value="Tipo" for="tipo"/>
-           <h:selectOneMenu id="tipo" value="#{novoItemBean.itemBiblioteca.tipo}" required="true" hideNoSelectionOption="true"
-                label="Tipo" style="width: 170px">
+           <p:outputLabel value="Tipo" for="tipo"/>
+           <p:selectOneMenu id="tipo" value="#{novoItemBean.itemBiblioteca.tipo}" required="true" label="Tipo">
                 <f:selectItem  itemLabel="Selecione" itemValue="#{null}" noSelectionOption="true" />
                 <f:selectItems value="#{novoItemBean.getTipos()}" var="vItem" itemLabel="#{vItem.nome}" 
                     itemValue="#{vItem}" />
            
-           </h:selectOneMenu>
+           </p:selectOneMenu>
            
-           <h:outputLabel value="Data de publicação" for="data-publicacao"/>
-           <h:inputText id="data-publicacao" value="#{novoItemBean.itemBiblioteca.dataPublicacao}" 
-                required="true" label="Data de publicação">
+           <p:outputLabel value="Data de publicação" for="data-publicacao"/>
+           <p:calendar id="data-publicacao" value="#{novoItemBean.itemBiblioteca.dataPublicacao}" required="true" 
+                label="Data de publicação" locale="pt_BR" showButtonPanel="true" navigator="true" pattern="dd/MM/yyyy"
+                yearRange="-30:+10" >
                 <f:convertDateTime pattern="dd/MM/yyyy" />
-           </h:inputText>
+           </p:calendar>
            
-           <h:outputLabel value="Nº páginas" for="numeroPaginas" />
-           <h:inputText id="numeroPaginas" value="#{novoItemBean.itemBiblioteca.quantidadePaginas}" required="true" label="Nº páginas" />
+           <p:outputLabel value="Nº páginas" for="numeroPaginas" />
+           <p:inputText id="numeroPaginas" value="#{novoItemBean.itemBiblioteca.quantidadePaginas}" required="true" label="Nº páginas" />
            
-           <h:outputLabel value="Assunto" for="assunto"/>
-           <h:inputText id="assunto" value="#{novoItemBean.itemBiblioteca.assunto}" label="Assunto" />
+           <p:outputLabel value="Assunto" for="assunto"/>
+           <p:inputText id="assunto" value="#{novoItemBean.itemBiblioteca.assunto}" label="Assunto" />
            
-           <h:outputLabel value="Tags" for="tags"/>
-           <h:inputText id="tags" value="#{novoItemBean.itemBiblioteca.tags}" label="Tags" />
+           <p:outputLabel value="Tags" for="tags"/>
+           <p:inputText id="tags" value="#{novoItemBean.itemBiblioteca.tags}" label="Tags" />
            
-           <h:outputLabel value="Descrição" for="descricao"/>
-           <h:inputTextarea id="descricao" value="#{novoItemBean.itemBiblioteca.descricao}" required="true" label="Descrição"
+           <p:outputLabel value="Descrição" for="descricao"/>
+           <p:inputTextarea id="descricao" value="#{novoItemBean.itemBiblioteca.descricao}" required="true" label="Descrição"
                 cols="21" rows="4" />
            
            <f:facet name="footer">
-                <h:commandButton action="#{novoItemBean.salvar}" value="Salvar"  />
-                <h:button outcome="index.xhtml" value="Cancelar" style="margin-left:150px;"/>
+                <p:commandButton action="#{novoItemBean.salvar}" value="Salvar" icon="fa fa-save" style="float:left;" />
+                <p:button outcome="index.xhtml" value="Cancelar" icon="fa fa-remove" style="float:right;"/>
            </f:facet>
-	   </h:panelGrid>
+	   </p:panelGrid>
    	      
 	</h:form>
 </h:body>
