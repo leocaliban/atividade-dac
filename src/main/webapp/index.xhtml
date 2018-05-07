@@ -9,6 +9,7 @@
 </h:head>
 
 <h:body style="background-color:#FFFAF0;">
+    
 
     <p:growl id="idMessages" showDetail="true" severity="info">
         <p:autoUpdate />
@@ -84,7 +85,7 @@
 
 	<p:dataTable id="tabelaItens" var="varItens" value="#{pesquisaItemBean.itens}" emptyMessage="Nenhum registro foi encontrado." >
 	
-		<p:column headerText="ISBN">
+		<p:column headerText="ISBN" style="text-align:center;" >
             <h:outputText value="#{varItens.iSBN}" />
         </p:column>
        
@@ -104,11 +105,11 @@
             <h:outputText value="#{varItens.assunto}" />
         </p:column>
 		
-		<p:column headerText="Nº páginas" >
+		<p:column headerText="Nº páginas" style="text-align:center;">
 			<h:outputText value="#{varItens.quantidadePaginas}" />
 		</p:column>
 		
-		<p:column headerText="Data de publicação">
+		<p:column headerText="Data de publicação" style="text-align:center;">
 			<h:outputText value="#{varItens.dataPublicacao}">
 				<f:convertDateTime pattern="dd/MM/yyyy" />
 			</h:outputText>

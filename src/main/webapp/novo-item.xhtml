@@ -14,6 +14,7 @@
 </h:head>
 
 <h:body style="background-color:#FFFAF0;">
+    <h:outputScript name="locale-primefaces.js" library="js" />
     <p:link outcome="index.xhtml" value="Voltar" />
 	<p:messages id="messagesErrors" showDetail="true" closable="true" severity="error">
         <p:autoUpdate />
@@ -32,12 +33,12 @@
                 rendered="#{novoItemBean.edicao}" />
 	       
 	       <p:outputLabel value="ISBN" for="isbn"/>
-	       <h:panelGroup>
+	       <p:outputPanel>
 	           <p:inputText id="isbn" value="#{novoItemBean.itemBiblioteca.iSBN}" required="true" label="ISBN">
 	                <f:validator validatorId="isbnValidator"/>
 	           </p:inputText>
 	           <p:message for="isbn" />
-           </h:panelGroup>
+           </p:outputPanel>
 	       
 	       <p:outputLabel value="Título" for="titulo"/>
 	       <p:inputText id="titulo" value="#{novoItemBean.itemBiblioteca.titulo}" required="true" label="Título" />
@@ -71,8 +72,11 @@
            <p:inputText id="tags" value="#{novoItemBean.itemBiblioteca.tags}" label="Tags" />
            
            <p:outputLabel value="Descrição" for="descricao"/>
-           <p:inputTextarea id="descricao" value="#{novoItemBean.itemBiblioteca.descricao}" required="true" label="Descrição"
-                cols="21" rows="4" />
+           <p:outputPanel>
+	           <p:inputTextarea id="descricao" value="#{novoItemBean.itemBiblioteca.descricao}" required="true" label="Descrição" 
+	                cols="22" rows="4" autoResize="false" maxlength="140" counter="contador" counterTemplate="Restam {0} caracteres" />
+	           <h:outputText id="contador" />
+           </p:outputPanel>
            
            <f:facet name="footer">
                 <p:commandButton action="#{novoItemBean.salvar}" value="Salvar" icon="fa fa-save" style="float:left;" />
