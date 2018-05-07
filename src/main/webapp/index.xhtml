@@ -121,11 +121,20 @@
 				<f:param name="item" value="#{varItens.id}" />
 			</p:link>
 			
-			<p:link outcome="deletar-item.xhtml" value="Excluir" style="float:right;">
-                <f:param name="item" value="#{varItens.id}" />
-            </p:link>
+			<p:commandButton id="excluirItemBotao" icon="fa fa-trash" action="#{pesquisaItemBean.deletar(varItens)}" 
+			     style="float:right;" >
+			     <p:confirm header="Confirmar exclusão." 
+			         message="Você tem certeza que quer excluir o item #{varItens.titulo}?" 
+			         icon="ui-icon-alert" />              
+            </p:commandButton>
+            <p:tooltip id="toolTipExcluirItem" for="excluirItemBotao" value="Excluir" position="top"/>
 			
 		</p:column>
 	</p:dataTable>
+
+	<p:confirmDialog id="confirmDialog" global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton id="confirmYes" value="Sim" styleClass="ui-confirmdialog-yes" icon="fa fa-remove" />
+		<p:commandButton id="confirmNo" value="Não" styleClass="ui-confirmdialog-no" icon="fa fa-ban" />
+	</p:confirmDialog>
 </h:body>
 </html>

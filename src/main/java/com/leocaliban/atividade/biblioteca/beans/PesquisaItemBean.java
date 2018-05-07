@@ -86,4 +86,16 @@ public class PesquisaItemBean extends AbstractBean {
 		this.filter = new ItemBibliotecaFilter();
 		return null;
 	}
+	
+	public String deletar(ItemBiblioteca itemBiblioteca) {
+        try {
+            service.deletar(itemBiblioteca);
+        } 
+        catch (ServiceBibliotecaException e) {
+            reportarMensagemDeErro(e.getMessage());
+            return null;
+        }
+        reportarMensagemDeSucesso("O item '" + itemBiblioteca.getTitulo() + "' foi excluído com sucesso!");
+        return "index.xhtml?faces-redirect=true";
+    }
 }

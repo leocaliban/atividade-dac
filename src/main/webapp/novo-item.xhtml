@@ -14,6 +14,7 @@
 </h:head>
 
 <h:body style="background-color:#FFFAF0;">
+    <p:link outcome="index.xhtml" value="Voltar" />
 	<p:messages id="messagesErrors" showDetail="true" closable="true" severity="error">
         <p:autoUpdate />
     </p:messages>
@@ -22,11 +23,9 @@
         <p:autoUpdate />
     </p:growl>
 	
-	<h1 align="center">#{novoItemBean.edicao ? 'Editar item de biblioteca' : 'Criar novo item de biblioteca'}</h1>
-    
 	<h:form id="form-novo" style="width: 400px; margin: 0 auto;" >
 	   <p:panelGrid columns="2" >
-	       <f:facet name="header">Item</f:facet>
+	       <f:facet name="header">#{novoItemBean.edicao ? 'Editar item de biblioteca' : 'Criar novo item de biblioteca'}</f:facet>
 	       
 	       <p:outputLabel value="Id" rendered="#{novoItemBean.edicao}" />
            <p:outputLabel value="#{novoItemBean.itemBiblioteca.id}"

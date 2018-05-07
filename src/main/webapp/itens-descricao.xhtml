@@ -10,30 +10,32 @@
 
 <h:body style="background-color:#FFFAF0;">
 
-    <h:link outcome="index.xhtml" value="Voltar" />
-	<h:messages />
+    <p:link outcome="index.xhtml" value="Voltar" />
+	<p:messages id="messagesErrors" showDetail="true" closable="true" severity="error">
+        <p:autoUpdate />
+    </p:messages>
 	
 	
 	<h:form id="formFiltro" style="width: 377px; margin: 0 auto;">
 		
-		<h:panelGrid columns="2" border="1" cellpadding = "10" cellspacing = "0" bgcolor="#E6E6FA">	
+		<p:panelGrid columns="2">	
 			<f:facet name="header">
 				<h:outputText value="Escolher Item"/>
 			</f:facet>
 			
-			<h:outputLabel value="Título do item" for="titulo" />
+			<p:outputLabel value="Título do item" for="titulo" />
 			
-			<h:selectOneMenu id="titulo" value="#{descricaoItemBean.itemSelecionado}" label="Título do item">
+			<p:selectOneMenu id="titulo" value="#{descricaoItemBean.itemSelecionado}" label="Título do item">
 				<f:selectItem  itemLabel="Selecione" itemValue="#{null}" />
 				<f:selectItems value="#{descricaoItemBean.itens}" var="varItem" itemLabel="#{varItem.titulo}" itemValue="#{varItem}" />
-			</h:selectOneMenu>
+			</p:selectOneMenu>
 	
 	        <f:facet name="footer">
-                <h:commandButton value="Mostrar Descrição" />
+                <p:commandButton value="Mostrar Descrição" update="descricao" icon="fa fa-refresh"/>
            </f:facet>
-           <h:outputLabel value="Descrição" />
-           <h:outputText value="#{descricaoItemBean.itemSelecionado.descricao}"></h:outputText>
-		</h:panelGrid>
+           <p:outputLabel value="Descrição" />
+           <h:outputText value="#{descricaoItemBean.itemSelecionado.descricao}" id="descricao"></h:outputText>
+		</p:panelGrid>
 	</h:form>
 	
 </h:body>
